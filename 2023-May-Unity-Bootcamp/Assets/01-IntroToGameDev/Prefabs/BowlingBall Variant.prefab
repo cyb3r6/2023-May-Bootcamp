@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1501861295561877272, guid: 5017832ca12443c47946de2cb02514a2, type: 3}
       propertyPath: m_Name
-      value: BowlingBall
+      value: BowlingBall Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1501861295561877283, guid: 5017832ca12443c47946de2cb02514a2, type: 3}
       propertyPath: m_RootOrder

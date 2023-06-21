@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
 
         bowlingBallOffset = spawnPoint.position - throwingArrow.position;
 
-        StartThrow();
     }
 
     

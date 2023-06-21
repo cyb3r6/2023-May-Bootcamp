@@ -65,7 +65,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6574604855492018288, guid: a35e68f7c39559b4191f78af0bb439a2, type: 3}
       propertyPath: m_Name
-      value: BowlingBall
+      value: BowlingBall Variant 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3732813662409174804, guid: a35e68f7c39559b4191f78af0bb439a2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a35e68f7c39559b4191f78af0bb439a2, type: 3}
