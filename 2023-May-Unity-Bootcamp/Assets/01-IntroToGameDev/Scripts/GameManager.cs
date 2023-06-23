@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     private PlayerController player;
 
     [SerializeField]
+    private ScoreManager scoreManager;
+
+    [SerializeField]
     private Pin[] pins;
 
     private bool isGamePlaying = false;
@@ -22,20 +25,41 @@ public class GameManager : MonoBehaviour
     {
         isGamePlaying = true;
 
-        // Get the first throw
-        SetNextThrow();
+        // getting the first throw
+        player.StartThrow();
     }
 
     public void SetNextThrow()
     {
-        // calcualte the fallen pins
-        CalculateFallenPins();
+        Invoke("NextThrow", 3.0f);
+    }
+    private void NextThrow()
+    {
+        // see if the current frame is the first one
+        if(scoreManager.currentFrame == 0)
+        {
+            Debug.Log($"Game over! Score is: {scoreManager.CalculateTotalScore()}");
+        }
+        else
+        {
+            Debug.Log($"Frame is: {scoreManager.currentFrame}. Throw is: {scoreManager.currentThrow}");
 
-        // let the player start to throw
-        player.StartThrow();
+            scoreManager.SetFrameScore(CalculateFallenPins());
+
+            Debug.Log($"Current score is: {scoreManager.CalculateTotalScore()}");
+            player.StartThrow();
+        }
     }
 
-    public void CalculateFallenPins()
+    public void ResetAllPins()
+    {
+        foreach(Pin pin in pins)
+        {
+            pin.ResetPin();
+        }
+    }
+
+    public int CalculateFallenPins()
     {
         int count = 0;
         foreach(Pin pin in pins)
@@ -43,9 +67,9 @@ public class GameManager : MonoBehaviour
             if (pin.isFallen)
             {
                 count++;    // count = count + 1;
+                pin.gameObject.SetActive(false);
             }
         }
-
-        Debug.Log($"Total fallen comrades {count}");
+        return count;
     }
 }

@@ -15,7 +15,7 @@ public class BowlingBall : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Pin"))
         {
-            Debug.Log("Collided with pin!");
+
         }
     }
 
@@ -23,7 +23,6 @@ public class BowlingBall : MonoBehaviour
     {
         if (other.CompareTag("Pit"))
         {
-            Debug.Log("entered the PIT");
             // tell the game mamanger to set the next throw
             gameManager.SetNextThrow();
 

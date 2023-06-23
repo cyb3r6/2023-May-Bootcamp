@@ -20,17 +20,33 @@ public class Pin : MonoBehaviour
 
     private void Update()
     {
-        isFallen = Quaternion.Angle(startRotation, transform.localRotation) > 5;
+        if (gameObject.activeSelf)
+        {
+            isFallen = Quaternion.Angle(startRotation, transform.localRotation) > 5;
+        }
     }
 
-    public void Reset()
+    public void ResetPin()
     {
+        gameObject.SetActive(true);
+
         // stopping enertia
         pinRigidbody.velocity = Vector3.zero;
         pinRigidbody.angularVelocity = Vector3.zero;
 
         // returning back to starting position & rotation
         transform.position = startPosition;
+        transform.position = startPosition + Vector3.up * 0.01f;
         transform.rotation = startRotation;
+
+        isFallen = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Pit"))
+        {
+            isFallen = true;
+        }
     }
 }
