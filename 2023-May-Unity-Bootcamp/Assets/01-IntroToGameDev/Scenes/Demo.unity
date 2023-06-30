@@ -3394,6 +3394,14 @@ PrefabInstance:
       propertyPath: m_margin.z
       value: 86.14557
       objectReference: {fileID: 0}
+    - target: {fileID: 8327188344558953211, guid: dd3dd42903e55304c8a86d306f3fbe2b, type: 3}
+      propertyPath: throw3Text
+      value: 
+      objectReference: {fileID: 1728142702}
+    - target: {fileID: 8327188344558953211, guid: dd3dd42903e55304c8a86d306f3fbe2b, type: 3}
+      propertyPath: isFinalFrame
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8496355126075026073, guid: dd3dd42903e55304c8a86d306f3fbe2b, type: 3}
       propertyPath: m_fontSize
       value: 32.7
