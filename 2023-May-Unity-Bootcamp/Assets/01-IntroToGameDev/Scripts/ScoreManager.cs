@@ -65,6 +65,7 @@ public class ScoreManager : MonoBehaviour
 
                     // show ui strike
                     uiManager.ShowStrike();
+                    gameManager.soundManager.PlaySound("strike");
                 }
 
                 // reset the pins and wait for ball 2
@@ -80,7 +81,7 @@ public class ScoreManager : MonoBehaviour
         // BALL 2!
         if(currentThrow == 2)
         {
-            frames[currentFrame - 1] += score;
+            frames[currentFrame - 1] += (score - frames[currentFrame -1]);
 
             if (isStrike)
             {
@@ -104,6 +105,7 @@ public class ScoreManager : MonoBehaviour
 
                     // show ui spare
                     uiManager.ShowSpare();
+                    gameManager.soundManager.PlaySound("spare");
                 }
             }
             else

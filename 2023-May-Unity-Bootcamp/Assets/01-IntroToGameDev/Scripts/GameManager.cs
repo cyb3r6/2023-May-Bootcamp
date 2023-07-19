@@ -5,23 +5,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public SoundManager soundManager;
+
     [SerializeField]
     private PlayerController player;
-
     [SerializeField]
     private ScoreManager scoreManager;
-
     [SerializeField]
     private UIManager uiManager;
-
     [SerializeField]
     private Pin[] pins;
+    [SerializeField]
+    private Camera mainCamera;
+    [SerializeField]
+    private Camera closeupCamera;
 
     private bool isGamePlaying = false;
 
     void Start()
     {
         StartGame();
+
+        // make sure the main camera is on
+        mainCamera.enabled = true;
+        closeupCamera.enabled = false;
     }
 
     public void StartGame()
@@ -57,7 +64,7 @@ public class GameManager : MonoBehaviour
             frameTotal += scoreManager.GetFrameScores()[i];
             uiManager.SetFrameTotal(i, frameTotal);
         }
-
+        SwitchCamera();
         player.StartThrow();
     }
 
@@ -81,5 +88,11 @@ public class GameManager : MonoBehaviour
             }
         }
         return count;
+    }
+
+    public void SwitchCamera()
+    {
+        mainCamera.enabled = !mainCamera.enabled;
+        closeupCamera.enabled = !closeupCamera.enabled;
     }
 }

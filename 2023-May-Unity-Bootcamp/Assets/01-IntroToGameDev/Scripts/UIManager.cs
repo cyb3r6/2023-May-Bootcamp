@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     private GameObject gameOverUI;
     [SerializeField]
     private TMP_Text scoreText;
+    [SerializeField]
+    private GameObject mobileInputCanvas;
 
     private FrameUI[] frames;
 
@@ -25,6 +27,11 @@ public class UIManager : MonoBehaviour
         strikeUImessage.SetActive(false);
         spareUIMessage.SetActive(false);
         gameOverUI.SetActive(false);
+        mobileInputCanvas.SetActive(false);
+
+#if UNITY_ANDROID || UNITY_IOS
+        mobileInputCanvas.SetActive(true);
+#endif
     }
 
     public void ResetFrameUIs()

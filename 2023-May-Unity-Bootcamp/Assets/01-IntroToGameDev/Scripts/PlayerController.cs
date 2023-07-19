@@ -17,10 +17,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody[] bowlingBallPrefabs;
     [SerializeField]
     private Transform spawnPoint;
+    [SerializeField]
+    private SoundManager soundManager;
 
     private Vector3 bowlingBallOffset;
     private bool wasBallThrown;
     private Rigidbody selectedBowlingBall;
+    private float horizontalAxis;
 
     void Start()
     {
@@ -45,7 +48,12 @@ public class PlayerController : MonoBehaviour
         if (!wasBallThrown)
         {
             // moving the arrow
+#if UNITY_STANDALONE || UNITY_EDITOR
             float movePosition = Input.GetAxis("Horizontal") * Time.deltaTime * playerMovementSpeed;
+#elif UNITY_ANDROID || UNITY_IOS
+            float movePosition = horizontalAxis * playerMovementSpeed * Time.deltaTime;
+#endif
+            
             float horizontalValue = Mathf.Clamp(throwingArrow.position.x + movePosition, arrowMinX, arrowMaxX);
             throwingArrow.position = new Vector3(horizontalValue, throwingArrow.position.y, throwingArrow.position.z);   // theres a little movement you can correct in the z direction
 
@@ -73,12 +81,42 @@ public class PlayerController : MonoBehaviour
     public void TryThrowBall()
     {
         // throw the ball
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             wasBallThrown = true;
 
             selectedBowlingBall.AddForce(throwingArrow.forward * throwForce, ForceMode.Impulse);
             arrowAnimator.SetBool("Aiming", false);
+            soundManager.PlaySound("throw");
+            soundManager.PlaySound("roll");
         }
+
+    }
+
+    public void ThrowBall()
+    {
+        wasBallThrown = true;
+        selectedBowlingBall.AddForce(throwingArrow.forward * throwForce, ForceMode.Impulse);
+        arrowAnimator.SetBool("Aiming", false);
+        soundManager.PlaySound("throw");
+        soundManager.PlaySound("roll");
+    }
+
+    public void SetHorizontal(bool isleft)
+    {
+        if (isleft)
+        {
+            horizontalAxis = -1;
+        }
+        else
+        {
+            horizontalAxis = 1;
+        }
+    }
+
+    public void ResetHorizontal()
+    {
+        horizontalAxis = 0;
     }
 }
